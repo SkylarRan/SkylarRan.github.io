@@ -1,11 +1,54 @@
-<!DOCTYPE html><html lang="en"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><link rel="stylesheet" type="text/css" href="//fonts.loli.net/css?family=Source+Code+Pro"><link rel="stylesheet" type="text/css" href="/css/style.css?v=2.0.4"><link rel="stylesheet" type="text/css" href="/css/highlight.css?v=2.0.4"><link rel="Shortcut Icon" href="/favicon.ico"><link rel="bookmark" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><title>1.复杂度分析 | Hexo</title><meta name="generator" content="Hexo 4.0.0"></head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">1.复杂度分析</h1><a id="logo" href="/.">Hexo</a><p class="description"></p></div><div id="nav-menu"><a href="/." class="current"><i class="fa fa-home"> Home</i></a><a href="/archives/"><i class="fa fa-archive"> Archive</i></a><a href="/about/"><i class="fa fa-user"> About</i></a></div><div id="search-form"><div id="result-mask" class="hide"></div><label><input id="search-key" type="text" autocomplete="off" placeholder="search"></label><div id="result-wrap" class="hide"><div id="search-result"></div></div><div class="hide"><template id="search-tpl"><div class="item"><a href="/{path}" title="{title}"><div class="title">{title}</div><div class="time">{date}</div><div class="tags">{tags}</div></a></div></template></div></div></div><div id="layout" class="layout-g"><div class="layout-l"><div class="content_container"><div class="post"><h1 class="post-title">1.复杂度分析</h1><div class="post-meta"><a href="/2019/11/30/1.ComplexityAnalysis/#comments" class="comment-count"></a><p><span class="date">Nov 30, 2019</span><span><i id="busuanzi_container_page_pv"><i id="busuanzi_value_page_pv"></i><i>Hits</i></i></span></p></div><div class="post-content"><p>计算机讲求的是运行的更快，更省内存空间，也就是对执行效率（时间）和资源消耗（空间）的要求。故在写算法时，要进行时间复杂度和空间复杂度分析，才能评断算法的好坏。</p>
-<h2 id="为什么要复杂度分析"><a href="#为什么要复杂度分析" class="headerlink" title="为什么要复杂度分析"></a>为什么要复杂度分析</h2><p>直接拿算法进行测试，得到执行时间和占用空间大小，这叫<em>事后统计法</em></p>
+<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="renderer" content="webkit"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><link rel="icon" href="/images/icons/favicon-16x16.png?v=2.0.0-rc.0" type="image/png" sizes="16x16"><link rel="icon" href="/images/icons/favicon-32x32.png?v=2.0.0-rc.0" type="image/png" sizes="32x32"><meta name="description" content="计算机讲求的是运行的更快，更省内存空间，也就是对执行效率（时间）和资源消耗（空间）的要求。故在写算法时，要进行时间复杂度和空间复杂度分析，才能评断算法的好坏。                     为什么要复杂度分析       直接拿算法进行测试，得到执行时间和占用空间大小，这叫事后统计法  测试结果受测试环境影响 测试结果受数据规模影响  我们需要用一个不用具体数据进行测试，就能估计出算法的">
+<meta name="keywords" content="数据结构与算法之美">
+<meta property="og:type" content="article">
+<meta property="og:title" content="1.复杂度分析">
+<meta property="og:url" content="http:&#x2F;&#x2F;skylarran.com&#x2F;2019&#x2F;11&#x2F;30&#x2F;1.ComplexityAnalysis&#x2F;index.html">
+<meta property="og:site_name" content="SkylarRan&#39;s Blog">
+<meta property="og:description" content="计算机讲求的是运行的更快，更省内存空间，也就是对执行效率（时间）和资源消耗（空间）的要求。故在写算法时，要进行时间复杂度和空间复杂度分析，才能评断算法的好坏。                     为什么要复杂度分析       直接拿算法进行测试，得到执行时间和占用空间大小，这叫事后统计法  测试结果受测试环境影响 测试结果受数据规模影响  我们需要用一个不用具体数据进行测试，就能估计出算法的">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http:&#x2F;&#x2F;skylarran.com&#x2F;2019&#x2F;11&#x2F;30&#x2F;1&#x2F;ordinaryComplexity.jpg">
+<meta property="og:updated_time" content="2019-11-30T07:48:15.376Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http:&#x2F;&#x2F;skylarran.com&#x2F;2019&#x2F;11&#x2F;30&#x2F;1&#x2F;ordinaryComplexity.jpg"><meta name="keywords" content="Skylar Ran, SkylarRan's Blog"><meta name="description" content=""><title>1.复杂度分析 | SkylarRan's Blog</title><link ref="canonical" href="http://skylarran.com/2019/11/30/1.ComplexityAnalysis/"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.12.1/css/all.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=2.0.0-rc.0"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontIcon: {"prompt":{"success":"fas fa-check-circle","info":"fas fa-arrow-circle-right","warning":"fas fa-exclamation-circle","error":"fas fa-times-circle"},"copyBtn":"fas fa-copy"},
+  sidebar: {"offsetTop":"20px","tocMaxDepth":6},
+  header: {"enable":true,"showOnPost":true,"scrollDownIcon":true},
+  postWidget: {"endText":true},
+  nightMode: {"enable":true},
+  back2top: {"enable":true},
+  codeblock: {"style":"default","highlight":"light","wordWrap":false},
+  reward: true,
+  fancybox: false,
+  zoomImage: {"gapAside":"20px"},
+  galleryWaterfall: undefined,
+  lazyload: false,
+  pjax: undefined,
+  externalLink: {"icon":{"enable":true,"name":"fas fa-external-link-alt"}},
+  shortcuts: undefined,
+  prompt: {"copyButton":"复制","copySuccess":"复制成功","copyError":"复制失败"},
+  sourcePath: {"js":"js","css":"css","images":"images"},
+};
+
+window.CONFIG = CONFIG;</script></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav header-nav--fixed"><div class="header-nav-inner"><div class="header-nav-menubtn"><i class="fas fa-bars"></i></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/"><span class="header-nav-menu-item__icon"><i class="fas fa-home"></i></span><span class="header-nav-menu-item__text">首页</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/archives/"><span class="header-nav-menu-item__icon"><i class="fas fa-folder-open"></i></span><span class="header-nav-menu-item__text">归档</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/categories/"><span class="header-nav-menu-item__icon"><i class="fas fa-layer-group"></i></span><span class="header-nav-menu-item__text">分类</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="/tags/"><span class="header-nav-menu-item__icon"><i class="fas fa-tags"></i></span><span class="header-nav-menu-item__text">标签</span></a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__link" href="javascript:;" target="_blank" rel="noopener" onclick="return false;"><span class="header-nav-menu-item__icon"><i class="fas fa-fingerprint"></i></span><span class="header-nav-menu-item__text">关于</span></a><div class="header-nav-submenu"><div class="header-nav-submenu-item"><a class="header-nav-submenu-item__link" href="/about/"><span class="header-nav-submenu-item__icon"><i class="fas fa-user"></i></span><span class="header-nav-submenu-item__text">作者</span></a></div></div></div></div><div class="header-nav-search"><span class="header-nav-search__icon"><i class="fas fa-search"></i></span><span class="header-nav-search__text">搜索</span></div><div class="header-nav-mode"><div class="mode"><div class="mode-track"><span class="mode-track-moon"></span><span class="mode-track-sun"></span></div><div class="mode-thumb"></div></div></div></div></nav><div class="header-banner"><div class="header-banner-info"><div class="header-banner-info__title">SkylarRan's Blog</div><div class="header-banner-info__subtitle"></div></div><div class="header-banner-arrow"><div class="header-banner-arrow__icon"><i class="fas fa-angle-down"></i></div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content" id="content"><!-- Just used to judge whether it is an article page--><div id="is-post"></div><div class="post"><header class="post-header"><h1 class="post-title">1.复杂度分析</h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2019-11-30</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2019-11-30</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">1.5k</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">9分</span></span></div></header><div class="post-body"><p>计算机讲求的是运行的更快，更省内存空间，也就是对执行效率（时间）和资源消耗（空间）的要求。故在写算法时，要进行时间复杂度和空间复杂度分析，才能评断算法的好坏。</p>
+
+        <h2 id="为什么要复杂度分析">
+          <a href="#为什么要复杂度分析" class="heading-link"><i class="fas fa-link"></i></a>为什么要复杂度分析</h2>
+      <p>直接拿算法进行测试，得到执行时间和占用空间大小，这叫<em>事后统计法</em></p>
 <ol>
 <li>测试结果受测试环境影响</li>
 <li>测试结果受数据规模影响</li>
 </ol>
 <p>我们需要用一个不用具体数据进行测试，就能估计出算法的执行时间和占用空间的方法， 即进行时间、空间复杂度分析。</p>
-<h2 id="复杂度分析的方法（大O复杂度表示法）"><a href="#复杂度分析的方法（大O复杂度表示法）" class="headerlink" title="复杂度分析的方法（大O复杂度表示法）"></a>复杂度分析的方法（大O复杂度表示法）</h2><h3 id="时间复杂度分析"><a href="#时间复杂度分析" class="headerlink" title="时间复杂度分析"></a>时间复杂度分析</h3><blockquote>
+
+        <h2 id="复杂度分析的方法（大O复杂度表示法）">
+          <a href="#复杂度分析的方法（大O复杂度表示法）" class="heading-link"><i class="fas fa-link"></i></a>复杂度分析的方法（大O复杂度表示法）</h2>
+      
+        <h3 id="时间复杂度分析">
+          <a href="#时间复杂度分析" class="heading-link"><i class="fas fa-link"></i></a>时间复杂度分析</h3>
+      <blockquote>
 <p>时间复杂度（Time complexity）：代码执行时间随数据规模增长的变化趋势</p>
 </blockquote>
 <ol>
@@ -15,7 +58,7 @@
 <blockquote>
 <p>给定已知的循环次数，即使是10000次，十万次，也是常量级时复</p>
 </blockquote>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">int cal(int n) &#123; </span><br><span class="line">    int sum_1 = 0; </span><br><span class="line">    int p = 1; </span><br><span class="line">    for (; p &lt; 1000; ++p) &#123; </span><br><span class="line">        sum_1 = sum_1 + p; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    int sum_2 = 0; </span><br><span class="line">    int q = 1; </span><br><span class="line">    for (; q &lt; n; ++q) &#123; </span><br><span class="line">        sum_2 = sum_2 + q; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    int sum_3 = 0; </span><br><span class="line">    int i = 1; </span><br><span class="line">    int j = 1; </span><br><span class="line">    for (; i &lt;= n; ++i) &#123; </span><br><span class="line">        j = 1; </span><br><span class="line">        for (; j &lt;= n; ++j) &#123; </span><br><span class="line">            sum_3 = sum_3 + i * j; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    return sum_1 + sum_2 + sum_3; &#125;</span><br></pre></td></tr></table></figure>
+ <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">int cal(int n) &#123; </span><br><span class="line">    int sum_1 = 0; </span><br><span class="line">    int p = 1; </span><br><span class="line">    for (; p &lt; 1000; ++p) &#123; </span><br><span class="line">        sum_1 = sum_1 + p; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    int sum_2 = 0; </span><br><span class="line">    int q = 1; </span><br><span class="line">    for (; q &lt; n; ++q) &#123; </span><br><span class="line">        sum_2 = sum_2 + q; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    int sum_3 = 0; </span><br><span class="line">    int i = 1; </span><br><span class="line">    int j = 1; </span><br><span class="line">    for (; i &lt;= n; ++i) &#123; </span><br><span class="line">        j = 1; </span><br><span class="line">        for (; j &lt;= n; ++j) &#123; </span><br><span class="line">            sum_3 = sum_3 + i * j; </span><br><span class="line">        &#125; </span><br><span class="line">    &#125; </span><br><span class="line">    </span><br><span class="line">    return sum_1 + sum_2 + sum_3; &#125;</span><br></pre></td></tr></table></div></figure>
 
 <blockquote>
 <p>第一段代码循环大概1000次，也是常量级，时复O（1）; 第二段循环n次，时复O（n）； 第三段循环n^2次，时复O（n^2）。 所以整个函数的时复为O（n^2）</p>
@@ -24,15 +67,30 @@
 <li><p>乘法法则：嵌套代码复杂度 = 嵌套代码内外循环复杂度的乘积</p>
 </li>
 </ol>
-<h3 id="常见时间复杂度实例分析"><a href="#常见时间复杂度实例分析" class="headerlink" title="常见时间复杂度实例分析"></a>常见时间复杂度实例分析</h3><p><img src="/2019/11/30/1/ordinaryComplexity.jpg" alt="Alt"></p>
+
+        <h3 id="常见时间复杂度实例分析">
+          <a href="#常见时间复杂度实例分析" class="heading-link"><i class="fas fa-link"></i></a>常见时间复杂度实例分析</h3>
+      <p><img src="/2019/11/30/1/ordinaryComplexity.jpg" alt="Alt"></p>
 <ol>
 <li>将对数阶O（logn）循环n次， 就是O（nlogn）</li>
 <li>O（m + n）， O（m * n） 数据规模m、n均未知</li>
 </ol>
-<h3 id="空间复杂度分析"><a href="#空间复杂度分析" class="headerlink" title="空间复杂度分析"></a>空间复杂度分析</h3><p>空间复杂度（Space complexity）：算法的存储空间随数据规模增长的变化趋势<br>常见空间复杂度： O（1） O（n） O（n^2）</p>
-<h2 id="最好最坏时间复杂度"><a href="#最好最坏时间复杂度" class="headerlink" title="最好最坏时间复杂度"></a>最好最坏时间复杂度</h2><h2 id="平均时间复杂度"><a href="#平均时间复杂度" class="headerlink" title="平均时间复杂度"></a>平均时间复杂度</h2><p>find（）：假设查找x在数组中的位置，存在0 ~ n-1位置上和不在数组中，共n+1中情况，那么平均情况的复杂度=（1+2+…+n+n）/（n+1）= n（n+3）/ 2(n+1)， 去除系数、低阶、常量，时复为O（n）</p>
+
+        <h3 id="空间复杂度分析">
+          <a href="#空间复杂度分析" class="heading-link"><i class="fas fa-link"></i></a>空间复杂度分析</h3>
+      <p>空间复杂度（Space complexity）：算法的存储空间随数据规模增长的变化趋势<br>常见空间复杂度： O（1） O（n） O（n^2）</p>
+
+        <h2 id="最好最坏时间复杂度">
+          <a href="#最好最坏时间复杂度" class="heading-link"><i class="fas fa-link"></i></a>最好最坏时间复杂度</h2>
+      
+        <h2 id="平均时间复杂度">
+          <a href="#平均时间复杂度" class="heading-link"><i class="fas fa-link"></i></a>平均时间复杂度</h2>
+      <p>find（）：假设查找x在数组中的位置，存在0 ~ n-1位置上和不在数组中，共n+1中情况，那么平均情况的复杂度=（1+2+…+n+n）/（n+1）= n（n+3）/ 2(n+1)， 去除系数、低阶、常量，时复为O（n）</p>
 <p>以上计算方法是错误的，没有考虑每种情况的概率。x是否存在于数组的概率各占1/2， x存在于0 ~ n-1位置上的概率各为1/2n, 所以（1+2+…+n）* 1/2n + n * 1/2 = 3n + 1 / 4, 故平均时复为O（n）。加入概率的叫做加权平均值（期望值），故称为加权平均时间复杂度,简称平均时间复杂度。</p>
-<h2 id="均摊时间复杂度"><a href="#均摊时间复杂度" class="headerlink" title="均摊时间复杂度"></a>均摊时间复杂度</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// array表示一个长度为n的数组</span><br><span class="line">// 代码中的array.length就等于n</span><br><span class="line">int[] array = new int[n];</span><br><span class="line">int count = 0;</span><br><span class="line"></span><br><span class="line">void insert(int val) &#123;</span><br><span class="line">   if (count == array.length) &#123;</span><br><span class="line">      int sum = 0;</span><br><span class="line">      for (int i = 0; i &lt; array.length; ++i) &#123;</span><br><span class="line">         sum = sum + array[i];</span><br><span class="line">      &#125;</span><br><span class="line">      array[0] = sum;</span><br><span class="line">      count = 1;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   array[count] = val;</span><br><span class="line">   ++count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        <h2 id="均摊时间复杂度">
+          <a href="#均摊时间复杂度" class="heading-link"><i class="fas fa-link"></i></a>均摊时间复杂度</h2>
+      <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">// array表示一个长度为n的数组</span><br><span class="line">// 代码中的array.length就等于n</span><br><span class="line">int[] array = new int[n];</span><br><span class="line">int count = 0;</span><br><span class="line"></span><br><span class="line">void insert(int val) &#123;</span><br><span class="line">   if (count == array.length) &#123;</span><br><span class="line">      int sum = 0;</span><br><span class="line">      for (int i = 0; i &lt; array.length; ++i) &#123;</span><br><span class="line">         sum = sum + array[i];</span><br><span class="line">      &#125;</span><br><span class="line">      array[0] = sum;</span><br><span class="line">      count = 1;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   array[count] = val;</span><br><span class="line">   ++count;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 <blockquote>
 <p>这段代码的功能是：数组没满时，直接插入元素；数组已满时，计算所有元素的和，清空数组，并将和存放在array[0],继续插入元素。</p>
 <ol>
@@ -49,11 +107,267 @@
 </li>
 </ol>
 </blockquote>
-<h3 id="什么时候用摊还分析法来估计算法的均摊时间复杂度？"><a href="#什么时候用摊还分析法来估计算法的均摊时间复杂度？" class="headerlink" title="什么时候用摊还分析法来估计算法的均摊时间复杂度？"></a>什么时候用摊还分析法来估计算法的均摊时间复杂度？</h3><p>当在特殊场景下，算法操作的时复有规律地分布着，看看是否能够把较高时间复杂度的操作均摊到较低时复的操作上。一般情况，均摊时复等于最好时复。 均摊时复是一种特殊的平均时复。</p>
-<h2 id="思考题"><a href="#思考题" class="headerlink" title="思考题"></a>思考题</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 全局变量，大小为10的数组array，长度len，下标i。</span><br><span class="line">int array[] = new int[10]; </span><br><span class="line">int len = 10;</span><br><span class="line">int i = 0;</span><br><span class="line"></span><br><span class="line">// 往数组中添加一个元素</span><br><span class="line">void add(int element) &#123;</span><br><span class="line">   if (i &gt;= len) &#123; // 数组空间不够了</span><br><span class="line">     // 重新申请一个2倍大小的数组空间</span><br><span class="line">     int new_array[] = new int[len*2];</span><br><span class="line">     // 把原来array数组中的数据依次copy到new_array</span><br><span class="line">     for (int j = 0; j &lt; len; ++j) &#123;</span><br><span class="line">       new_array[j] = array[j];</span><br><span class="line">     &#125;</span><br><span class="line">     // new_array复制给array，array现在大小就是2倍len了</span><br><span class="line">     array = new_array;</span><br><span class="line">     len = 2 * len;</span><br><span class="line">   &#125;</span><br><span class="line">   // 将element放到下标为i的位置，下标i加一</span><br><span class="line">   array[i] = element;</span><br><span class="line">   ++i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        <h3 id="什么时候用摊还分析法来估计算法的均摊时间复杂度？">
+          <a href="#什么时候用摊还分析法来估计算法的均摊时间复杂度？" class="heading-link"><i class="fas fa-link"></i></a>什么时候用摊还分析法来估计算法的均摊时间复杂度？</h3>
+      <p>当在特殊场景下，算法操作的时复有规律地分布着，看看是否能够把较高时间复杂度的操作均摊到较低时复的操作上。一般情况，均摊时复等于最好时复。 均摊时复是一种特殊的平均时复。</p>
+
+        <h2 id="思考题">
+          <a href="#思考题" class="heading-link"><i class="fas fa-link"></i></a>思考题</h2>
+      <figure class="highlight plain"><div class="table-container"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">// 全局变量，大小为10的数组array，长度len，下标i。</span><br><span class="line">int array[] = new int[10]; </span><br><span class="line">int len = 10;</span><br><span class="line">int i = 0;</span><br><span class="line"></span><br><span class="line">// 往数组中添加一个元素</span><br><span class="line">void add(int element) &#123;</span><br><span class="line">   if (i &gt;= len) &#123; // 数组空间不够了</span><br><span class="line">     // 重新申请一个2倍大小的数组空间</span><br><span class="line">     int new_array[] = new int[len*2];</span><br><span class="line">     // 把原来array数组中的数据依次copy到new_array</span><br><span class="line">     for (int j = 0; j &lt; len; ++j) &#123;</span><br><span class="line">       new_array[j] = array[j];</span><br><span class="line">     &#125;</span><br><span class="line">     // new_array复制给array，array现在大小就是2倍len了</span><br><span class="line">     array = new_array;</span><br><span class="line">     len = 2 * len;</span><br><span class="line">   &#125;</span><br><span class="line">   // 将element放到下标为i的位置，下标i加一</span><br><span class="line">   array[i] = element;</span><br><span class="line">   ++i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></div></figure>
 <blockquote>
 <p>最好时复：数组未满，直接添加，O（1）</p>
 <p>最坏时复：数组已满，扩容搬移数据后再添加，O（n）</p>
 <p>摊还时复： 将搬移数据的操作均摊到前n-1次直接添加的操作，时复等于直接添加的时复O（1）</p>
 </blockquote>
-</div><div class="post-copyright"><blockquote><p>Original author: Skylar Ran</p><p>Original link: <a href="http://SkylarRan.com/2019/11/30/1.ComplexityAnalysis/">http://SkylarRan.com/2019/11/30/1.ComplexityAnalysis/</a></p><p>Copyright Notice: Please indicate the source of the reprint (must retain the author's signature and link)</p></blockquote></div><div class="tags"><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/">数据结构与算法之美</a></div><div class="post-share"><div class="social-share"><span>Share:</span></div></div><div class="post-nav"><a href="/2019/11/12/hello-world/" class="next">Hello World</a></div><div id="comments"></div></div></div></div><div class="layout-r"><div id="sidebar"><div class="search-pla"></div><div id="toc" class="widget"><div class="widget-title"><i class="fa fa-fei">Contents</i></div><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要复杂度分析"><span class="toc-text">为什么要复杂度分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂度分析的方法（大O复杂度表示法）"><span class="toc-text">复杂度分析的方法（大O复杂度表示法）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#时间复杂度分析"><span class="toc-text">时间复杂度分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见时间复杂度实例分析"><span class="toc-text">常见时间复杂度实例分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空间复杂度分析"><span class="toc-text">空间复杂度分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最好最坏时间复杂度"><span class="toc-text">最好最坏时间复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平均时间复杂度"><span class="toc-text">平均时间复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#均摊时间复杂度"><span class="toc-text">均摊时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么时候用摊还分析法来估计算法的均摊时间复杂度？"><span class="toc-text">什么时候用摊还分析法来估计算法的均摊时间复杂度？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思考题"><span class="toc-text">思考题</span></a></li></ol></div><div class="widget"><div class="widget-title"><i class="fa fa-xie"> Recent</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2019/11/30/1.ComplexityAnalysis/">1.复杂度分析</a></li><li class="post-list-item"><a class="post-list-link" href="/2019/11/12/hello-world/">Hello World</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-biao"> Tags</i></div><div class="tagcloud"><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/" style="font-size: 15px;">数据结构与算法之美</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-archive"> Archive</i></div><ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/">2019</a><span class="archive-list-count">2</span></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-you"> Blogroll</i></div><ul></ul><a href="http://www.example1.com/" title="site-name1" target="_blank">site-name1</a><ul></ul><a href="http://www.example2.com/" title="site-name2" target="_blank">site-name2</a><ul></ul><a href="http://www.example3.com/" title="site-name3" target="_blank">site-name3</a></div></div></div></div><a id="totop" href="#top"></a><div id="footer"><div class="footer-info"><p><a href="/baidusitemap.xml">Site Map</a> |  <a href="/atom.xml">Subscribe to this site</a> |  <a href="/about/">Contact the blogger</a></p><p>本站总访问量：<i id="busuanzi_container_site_pv"><i id="busuanzi_value_site_pv"></i></i>次，本站总访客数:<i id="busuanzi_container_site_uv"><i id="busuanzi_value_site_uv"></i></i>人</p><p><span> Copyright &copy;<a href="/." rel="nofollow">Skylar Ran.</a></span><span> Theme by<a rel="nofollow" target="_blank" href="https://github.com/chaooo/hexo-theme-BlueLake"> BlueLake.</a></span><span> Count by<a href="http://busuanzi.ibruce.info/" target="_blank" rel="noopener"> busuanzi.</a></span><span> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a></span></p></div></div></div><script src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" async></script><script type="text/javascript" src="/js/search.json.js?v=2.0.4"></script><script type="text/javascript" src="/js/toctotop.js?v=2.0.4" async></script><link rel="stylesheet" type="text/css" href="/share/css/share.css"><script type="text/javascript" src="/share/js/social-share.js" charset="utf-8"></script><script type="text/javascript" src="/share/js/qrcode.js" charset="utf-8"></script></body></html>
+</div><footer class="post-footer"><div class="post-ending ending"><div class="ending__text">------ 本文结束，感谢您的阅读 ------</div></div><div class="post-copyright copyright"><div class="copyright-author"><span class="copyright-author__name">本文作者: </span><span class="copyright-author__value"><a href="http://SkylarRan.com">Skylar Ran</a></span></div><div class="copyright-link"><span class="copyright-link__name">本文链接: </span><span class="copyright-link__value"><a href="http://skylarran.com/2019/11/30/1.ComplexityAnalysis/">http://skylarran.com/2019/11/30/1.ComplexityAnalysis/</a></span></div><div class="copyright-notice"><span class="copyright-notice__name">版权声明: </span><span class="copyright-notice__value">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> 许可协议。转载请注明出处！</span></div></div><div class="post-tags"><span class="post-tags-item"><span class="post-tags-item__icon"><i class="fas fa-tag"></i></span><a class="post-tags-item__link" href="http://skylarran.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95%E4%B9%8B%E7%BE%8E/">数据结构与算法之美</a></span></div><div class="post-reward reward"><div class="reward-button">请我喝杯咖啡~</div><div class="reward-qrcode"><span class="reward-qrcode-alipay"><img class="reward-qrcode-alipay__img" src="/upload/alipay.jpeg"><div class="reward-qrcode-alipay__text">支付宝打赏</div></span><span class="reward-qrcode-wechat"><img class="reward-qrcode-wechat__img" src="/upload/wechatpay.png"><div class="reward-qrcode-wechat__text">微信打赏</div></span></div></div><nav class="post-paginator paginator"><div class="paginator-next"><a class="paginator-next__link" href="/2019/11/12/hello-world/"><span class="paginator-prev__text">Hello World</span><span class="paginator-next__icon"><i class="fas fa-angle-right"></i></span></a></div></nav></footer></div></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><div class="sidebar-nav"><span class="sidebar-nav-toc current">文章目录</span><span class="sidebar-nav-ov">站点概览</span></div><section class="sidebar-toc"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#为什么要复杂度分析"><span class="toc-number">1.</span> <span class="toc-text">
+          为什么要复杂度分析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#复杂度分析的方法（大O复杂度表示法）"><span class="toc-number">2.</span> <span class="toc-text">
+          复杂度分析的方法（大O复杂度表示法）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#时间复杂度分析"><span class="toc-number">2.1.</span> <span class="toc-text">
+          时间复杂度分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常见时间复杂度实例分析"><span class="toc-number">2.2.</span> <span class="toc-text">
+          常见时间复杂度实例分析</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#空间复杂度分析"><span class="toc-number">2.3.</span> <span class="toc-text">
+          空间复杂度分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#最好最坏时间复杂度"><span class="toc-number">3.</span> <span class="toc-text">
+          最好最坏时间复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#平均时间复杂度"><span class="toc-number">4.</span> <span class="toc-text">
+          平均时间复杂度</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#均摊时间复杂度"><span class="toc-number">5.</span> <span class="toc-text">
+          均摊时间复杂度</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#什么时候用摊还分析法来估计算法的均摊时间复杂度？"><span class="toc-number">5.1.</span> <span class="toc-text">
+          什么时候用摊还分析法来估计算法的均摊时间复杂度？</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#思考题"><span class="toc-number">6.</span> <span class="toc-text">
+          思考题</span></a></li></ol></section><!-- ov = overview--><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/images/avatar.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">write code and love life</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/skylarran" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a></div><div class="sidebar-ov-state"><a class="sidebar-ov-state-item sidebar-ov-state-item--posts" href="/archives/"><div class="sidebar-ov-state-item__count">2</div><div class="sidebar-ov-state-item__name">归档</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--categories" href="/categories/"><div class="sidebar-ov-state-item__count">0</div><div class="sidebar-ov-state-item__name">分类</div></a><a class="sidebar-ov-state-item sidebar-ov-state-item--tags" href="/tags/"><div class="sidebar-ov-state-item__count">1</div><div class="sidebar-ov-state-item__name">标签</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span class="sidebar-reading-info__text">你已阅读了 </span><span class="sidebar-reading-info__num">0</span></div><div class="sidebar-reading-line"></div></div></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2019~2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Skylar Ran</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v4.0.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.0.0-rc.0</span></div><div>托管于<a href="https://github.com/SkylarRan/SkylarRan.github.io" rel="noopener" target="_blank">Github</a></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script>function initSearch() {
+  var isXML = true;
+  var search_path = 'search.json';
+
+  if (!search_path) {
+    search_path = 'search.xml';
+  } else if (/json$/i.test(search_path)) {
+    isXML = false;
+  }
+
+  var path = '/' + search_path;
+  $.ajax({
+    url: path,
+    dataType: isXML ? 'xml' : 'json',
+    async: true,
+    success: function (res) {
+      var datas = isXML ? $('entry', res).map(function () {
+        // 将 XML 转为 JSON
+        return {
+          title: $('title', this).text(),
+          content: $('content', this).text(),
+          url: $('url', this).text()
+        };
+      }).get() : res;
+      var $input = $('.search-input input');
+      var $result = $('.search-results');
+      // 搜索对象（标题、内容）的权重，影响显示顺序
+      var WEIGHT = { title: 100, content: 1 };
+      var searchPost = function () {
+        var searchText = $input.val().toLowerCase().trim();
+        // 根据空白字符分隔关键字
+        var keywords = searchText.split(/[\s]+/);
+        // 搜索结果
+        var matchPosts = [];
+
+        // 有多个关键字时，将原文字整个保存下来
+        if (keywords.length > 1) {
+          keywords.push(searchText);
+        }
+        // 防止未输入字符时搜索
+        if (searchText.length > 0) {
+          datas.forEach(function (data) {
+            var isMatch  = false;
+            // 没有标题的文章使用预设的 i18n 变量代替
+            var title = (data.title && data.title.trim()) || '[ 文章无标题 ]';
+            var titleLower = title && title.toLowerCase();
+            // 删除 HTML 标签 和 所有空白字符
+            var content = data.content && data.content.replace(/<[^>]+>/g, '');
+            var contentLower = content && content.toLowerCase();
+            // 删除重复的 /
+            var postURL = data.url && decodeURI(data.url).replace(/\/{2,}/g, '/');
+            // 标题中匹配到的关键词
+            var titleHitSlice = [];
+            // 内容中匹配到的关键词
+            var contentHitSlice = [];
+
+            keywords.forEach(function (keyword) {
+              /**
+              * 获取匹配的关键词的索引
+              * @param {String} keyword 要匹配的关键字
+              * @param {String} text 原文字
+              * @param {Boolean} caseSensitive 是否区分大小写
+              * @param {Number} weight 匹配对象的权重。权重大的优先显示
+              * @return {Array}
+              */
+              function getIndexByword (word, text, caseSensitive, weight) {
+                if (!word || !text) {
+                  return [];
+                };
+
+                var startIndex = 0; // 每次匹配的开始索引
+                var index = -1;     // 匹配到的索引值
+                var result = [];    // 匹配结果
+
+                if (!caseSensitive) {
+                  word = word.toLowerCase();
+                  text = text.toLowerCase();
+                }
+
+                while((index = text.indexOf(word, startIndex)) !== -1) {
+                  var hasMatch = false;
+                  // 索引位置相同的关键词，保留长度较长的
+                  titleHitSlice.forEach(function (hit) {
+                    if (hit.index === index && hit.word.length < word.length) {
+                      hit.word = word;
+                      hasMatch = true;
+                    }
+                  });
+                  startIndex = index + word.length;
+                  !hasMatch && result.push({ index: index, word: word, weight: weight });
+                }
+                return result;
+              }
+              titleHitSlice = titleHitSlice.concat(getIndexByword(keyword, titleLower, false, WEIGHT.title));
+              contentHitSlice = contentHitSlice.concat(getIndexByword(keyword, contentLower, false, WEIGHT.content));
+            });
+
+            var hitTitle = titleHitSlice.length;
+            var hitContent = contentHitSlice.length;
+
+            if (hitTitle > 0 || hitContent > 0) {
+              isMatch = true;
+            }
+            if (isMatch) {
+              ;[titleHitSlice, contentHitSlice].forEach(function (hit) {
+                // 按照匹配文字的索引的递增顺序排序
+                hit.sort(function (left, right) {
+                  return left.index - right.index;
+                });
+              });
+              /**
+              * 给文本中匹配到的关键词添加标记，从而进行高亮显示
+              * @param {String} text 原文本
+              * @param {Array} hitSlice 匹配项的索引信息
+              * @param {Number} start 开始索引
+              * @param {Number} end 结束索引
+              * @return {String}
+              */
+              function highlightKeyword (text, hitSlice, start, end) {
+                if (!text || !hitSlice || !hitSlice.length) {
+                  return;
+                }
+
+                var result = '';
+                var startIndex = start;
+                var endIndex = end;
+                hitSlice.forEach(function (hit) {
+                  if (hit.index < startIndex) {
+                    return;
+                  }
+
+                  var hitWordEnd = hit.index + hit.word.length;
+                  result += text.slice(startIndex, hit.index);
+                  result += '<b>' + text.slice(hit.index, hitWordEnd) + '</b>';
+                  startIndex = hitWordEnd;
+                });
+                result += text.slice(startIndex, endIndex);
+                return result;
+              }
+
+              var postData = {};
+              // 文章总的搜索权重
+              var postWeight = titleHitSlice.length * WEIGHT.title + contentHitSlice.length * WEIGHT.content;
+              // 标记匹配关键词后的标题
+              var postTitle = highlightKeyword(title, titleHitSlice, 0, title.length) || title;
+              // 标记匹配关键词后的内容
+              var postContent;
+              // 显示内容的长度
+              var SHOW_WORD_LENGTH = 200;
+              // 命中关键词前的字符显示长度
+              var SHOW_WORD_FRONT_LENGTH = 20;
+              var SHOW_WORD_END_LENGTH = SHOW_WORD_LENGTH - SHOW_WORD_FRONT_LENGTH;
+
+              // 截取匹配的第一个字符，前后共 200 个字符来显示
+              if (contentHitSlice.length > 0) {
+                var firstIndex = contentHitSlice[0].index;
+                var start = firstIndex > SHOW_WORD_FRONT_LENGTH ? firstIndex - SHOW_WORD_FRONT_LENGTH : 0;
+                var end = firstIndex + SHOW_WORD_END_LENGTH;
+                postContent = highlightKeyword(content, contentHitSlice, start, end);
+              } else { // 未匹配到内容，直接截取前 200 个字符来显示
+                postContent = content.slice(0, SHOW_WORD_LENGTH);
+              }
+              postData.title = postTitle;
+              postData.content = postContent;
+              postData.url = postURL;
+              postData.weight = postWeight;
+              matchPosts.push(postData);
+            }
+          });
+        }
+
+        var resultInnerHtml = '';
+        if (matchPosts.length) {
+          // 按权重递增的顺序排序，使权重大的优先显示
+          matchPosts.sort(function (left, right) {
+            return right.weight - left.weight;
+          });
+          resultInnerHtml += '<ul>';
+          matchPosts.forEach(function (post) {
+            resultInnerHtml += '<li><a class="search-results-title" href="' + post.url + '">';
+            resultInnerHtml += post.title;
+            resultInnerHtml += '</a><div class="search-results-content">';
+            resultInnerHtml += post.content;
+            resultInnerHtml += '</div></li>';
+          });
+          resultInnerHtml += '</ul>';
+        } else {
+          resultInnerHtml += '<div class="search-results-none"><i class="far fa-meh"></i></div>';
+        }
+        $result.html(resultInnerHtml);
+      };
+      $input.on('input', searchPost);
+      $input.on('keyup', function (e) {
+        if (e.keyCode === Stun.utils.codeToKeyCode('Enter')) {
+          searchPost();
+        }
+      });
+    }
+  });
+}
+
+function closeSearch () {
+  $('body').css({ overflow: 'auto' });
+  $('.search-popup').css({ display: 'none' });
+  $('.search-mask').css({ display: 'none' });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+  Stun.utils.pjaxReloadLocalSearch = function () {
+    $('.header-nav-search').on('click', function (e) {
+      e.stopPropagation();
+      $('body').css('overflow', 'hidden');
+      $('.search-popup')
+        .velocity('stop')
+        .velocity('transition.expandIn', {
+          duration: 300,
+          complete: function () {
+            $('.search-popup input').focus();
+          }
+        });
+      $('.search-mask')
+        .velocity('stop')
+        .velocity('transition.fadeIn', {
+          duration: 300
+        });
+
+      initSearch();
+    });
+    $('.search-mask, .search-close').on('click', function () {
+      closeSearch();
+    });
+    $(document).on('keydown', function (e) {
+      // Escape <=> 27
+      if (e.keyCode === Stun.utils.codeToKeyCode('Escape')) {
+        closeSearch();
+      }
+    });
+  };
+
+  Stun.utils.pjaxReloadLocalSearch();
+}, false);</script><script src="/js/utils.js?v=2.0.0-rc.0"></script><script src="/js/stun-boot.js?v=2.0.0-rc.0"></script><script src="/js/scroll.js?v=2.0.0-rc.0"></script><script src="/js/header.js?v=2.0.0-rc.0"></script><script src="/js/sidebar.js?v=2.0.0-rc.0"></script></body></html>
