@@ -419,6 +419,38 @@ window.CONFIG = CONFIG;</script></head><body><div class="container" id="containe
       <p>散列表：借助数组实现查找操作时复为O（1），会发生散列冲突，用开放寻址或者链表法来解决。</p>
 <p>跳表：在链表上加入多级索引，查找时复为O（logn）</p>
 <p>红黑树：一种平衡二叉查找树，时复为O（logn）</p>
+</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2019/12/09/8.BinarySearch/">8.BinarySearch</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2019-12-09</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2019-12-09</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">866</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">4分</span></span></div></header><div class="post-body"><div class="post-excerpt">
+        <h1 id="二分查找：如何用最省内存的方式实现快速查找功能？">
+          <a href="#二分查找：如何用最省内存的方式实现快速查找功能？" class="heading-link"><i class="fas fa-link"></i></a>二分查找：如何用最省内存的方式实现快速查找功能？</h1>
+      <p>二分查找针对的是一个有序集合，查找思想有点类似分治思想。每次都通过跟区间的中间元素对比，将待查找的区间缩小为原来的一般，知道找到该元素或者区间缩小为0。时间复杂度为O（logn），极其高效。</p>
+
+        <h2 id="二分查找的递归与非递归实现">
+          <a href="#二分查找的递归与非递归实现" class="heading-link"><i class="fas fa-link"></i></a>二分查找的递归与非递归实现</h2>
+      
+        <h2 id="二分查找应用场景的局限性">
+          <a href="#二分查找应用场景的局限性" class="heading-link"><i class="fas fa-link"></i></a>二分查找应用场景的局限性</h2>
+      <ol>
+<li>二分查找依赖的是顺序表结构，简单点说就是数组，利用了数组根据下表随机访问元素时复为O（1）的特征。</li>
+<li>二分查找针对的是有序数据<blockquote>
+<p>如果数据无序，需要先排好序。 如果针对的是一组静态数据，插入和删除操作较少，可以进行一次排序，多次二分查找。这样排序的成本可被均摊。<br>若是有频繁地插入和删除操作,要保证在二分查找前是有序的， 要么在插入和删除数据之后就保证数据仍然有序，要么就在二分查找之前排序。这两种方式维护有序的成本都是很高的。<br>所以，二分查找只适用于插入与删除操作不频繁，一次排序多次查找的场景。针对动态变化的数据集，二叉树结构更适合查找。</p>
+</blockquote>
+</li>
+<li>数据量太小不适合二分查找<blockquote>
+<p>二分查找的时复是O（logn），数据规模大才能体现出O（logn）的高效，二分查找的优势才更明显。 若数据量很小，直接顺序遍历查找就好了，小数据规模下两者的执行效率差不多。</p>
+</blockquote>
+</li>
+</ol>
+<blockquote>
+<p>若是查找过程中的比较操作很复杂，例如长字符串的对比，这时就需要尽量减少比较操作，即使数据量很小，也要选择二分查找来减少比较次数。<br>4. 数据量太大也不适合二分查找<br>二分查找依赖的是数组，数组就要保证数据的连续性，对内存要求比较苛刻。数据量太大很难申请到连续的内存空间来存放数据。</p>
+</blockquote>
+
+        <h2 id="假设我们有-1000-万个整数数据，每个数据占-8-个字节，如何设计数据结构和算法，快速判断某个整数是否出现在这-1000-万数据中？-我们希望这个功能不要占用太多的内存空间，最多不要超过-100MB，你会怎么做呢？">
+          <a href="#假设我们有-1000-万个整数数据，每个数据占-8-个字节，如何设计数据结构和算法，快速判断某个整数是否出现在这-1000-万数据中？-我们希望这个功能不要占用太多的内存空间，最多不要超过-100MB，你会怎么做呢？" class="heading-link"><i class="fas fa-link"></i></a>假设我们有 1000 万个整数数据，每个数据占 8 个字节，如何设计数据结构和算法，快速判断某个整数是否出现在这 1000 万数据中？ 我们希望这个功能不要占用太多的内存空间，最多不要超过 100MB，你会怎么做呢？</h2>
+      <p>1MB = 1000 Kb = 1000000 b<br>1000w * 8b  = 80 000 000 b = 80MB<br>所以直接将所有数据存放在内存中，先用快排，再进行二分查找。 这种方式是最节省内存空间的。<br>散列表和二叉树是支持快速查找的动态数据结构，但在这里不行，因为存放数据会需要额外的空间，100MB肯定不够。</p>
+
+        <h2 id="如果数据使用链表存储，二分查找的时间复杂就会变得很高，那查找的时间复杂度究竟是多少呢？">
+          <a href="#如果数据使用链表存储，二分查找的时间复杂就会变得很高，那查找的时间复杂度究竟是多少呢？" class="heading-link"><i class="fas fa-link"></i></a>如果数据使用链表存储，二分查找的时间复杂就会变得很高，那查找的时间复杂度究竟是多少呢？</h2>
+      <p>如果数据使用单链表存储且是有序的，使用快慢指针同时获取中间结点尾结点的时复是O（n），再比较元素缩小区间，那么基于有序单链表的二分查找的时复就是O（nlogn）</p>
 </div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2019/12/09/9.SkipList/">9.SkipList</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2019-12-09</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2019-12-09</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">806</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">4分</span></span></div></header><div class="post-body"><div class="post-excerpt">
         <h1 id="跳表">
           <a href="#跳表" class="heading-link"><i class="fas fa-link"></i></a>跳表</h1>
@@ -470,38 +502,6 @@ window.CONFIG = CONFIG;</script></head><body><div class="container" id="containe
         <img class="lazyload lazyload-gif" src="/images/loading.svg" data-src="../img/skipList4.jpg" alt="Alt">
       </p>
 <p>关于随机函数的选择可以看Redis 中关于有序集合的跳表实现。</p>
-</div></div></article><article class="postlist-item post"><header class="post-header"><h1 class="post-title"><a class="post-title__link" href="/2019/12/09/8.BinarySearch/">8.BinarySearch</a></h1><div class="post-meta"><span class="post-meta-item post-meta-item--createtime"><span class="post-meta-item__icon"><i class="far fa-calendar-plus"></i></span><span class="post-meta-item__info">发表于</span><span class="post-meta-item__value">2019-12-09</span></span><span class="post-meta-item post-meta-item--updatetime"><span class="post-meta-item__icon"><i class="far fa-calendar-check"></i></span><span class="post-meta-item__info">更新于</span><span class="post-meta-item__value">2019-12-09</span></span><span class="post-meta-item post-meta-item--wordcount"><span class="post-meta-item__icon"><i class="far fa-file-word"></i></span><span class="post-meta-item__info">字数统计</span><span class="post-meta-item__value">866</span></span><span class="post-meta-item post-meta-item--readtime"><span class="post-meta-item__icon"><i class="far fa-clock"></i></span><span class="post-meta-item__info">阅读时长</span><span class="post-meta-item__value">4分</span></span></div></header><div class="post-body"><div class="post-excerpt">
-        <h1 id="二分查找：如何用最省内存的方式实现快速查找功能？">
-          <a href="#二分查找：如何用最省内存的方式实现快速查找功能？" class="heading-link"><i class="fas fa-link"></i></a>二分查找：如何用最省内存的方式实现快速查找功能？</h1>
-      <p>二分查找针对的是一个有序集合，查找思想有点类似分治思想。每次都通过跟区间的中间元素对比，将待查找的区间缩小为原来的一般，知道找到该元素或者区间缩小为0。时间复杂度为O（logn），极其高效。</p>
-
-        <h2 id="二分查找的递归与非递归实现">
-          <a href="#二分查找的递归与非递归实现" class="heading-link"><i class="fas fa-link"></i></a>二分查找的递归与非递归实现</h2>
-      
-        <h2 id="二分查找应用场景的局限性">
-          <a href="#二分查找应用场景的局限性" class="heading-link"><i class="fas fa-link"></i></a>二分查找应用场景的局限性</h2>
-      <ol>
-<li>二分查找依赖的是顺序表结构，简单点说就是数组，利用了数组根据下表随机访问元素时复为O（1）的特征。</li>
-<li>二分查找针对的是有序数据<blockquote>
-<p>如果数据无序，需要先排好序。 如果针对的是一组静态数据，插入和删除操作较少，可以进行一次排序，多次二分查找。这样排序的成本可被均摊。<br>若是有频繁地插入和删除操作,要保证在二分查找前是有序的， 要么在插入和删除数据之后就保证数据仍然有序，要么就在二分查找之前排序。这两种方式维护有序的成本都是很高的。<br>所以，二分查找只适用于插入与删除操作不频繁，一次排序多次查找的场景。针对动态变化的数据集，二叉树结构更适合查找。</p>
-</blockquote>
-</li>
-<li>数据量太小不适合二分查找<blockquote>
-<p>二分查找的时复是O（logn），数据规模大才能体现出O（logn）的高效，二分查找的优势才更明显。 若数据量很小，直接顺序遍历查找就好了，小数据规模下两者的执行效率差不多。</p>
-</blockquote>
-</li>
-</ol>
-<blockquote>
-<p>若是查找过程中的比较操作很复杂，例如长字符串的对比，这时就需要尽量减少比较操作，即使数据量很小，也要选择二分查找来减少比较次数。<br>4. 数据量太大也不适合二分查找<br>二分查找依赖的是数组，数组就要保证数据的连续性，对内存要求比较苛刻。数据量太大很难申请到连续的内存空间来存放数据。</p>
-</blockquote>
-
-        <h2 id="假设我们有-1000-万个整数数据，每个数据占-8-个字节，如何设计数据结构和算法，快速判断某个整数是否出现在这-1000-万数据中？-我们希望这个功能不要占用太多的内存空间，最多不要超过-100MB，你会怎么做呢？">
-          <a href="#假设我们有-1000-万个整数数据，每个数据占-8-个字节，如何设计数据结构和算法，快速判断某个整数是否出现在这-1000-万数据中？-我们希望这个功能不要占用太多的内存空间，最多不要超过-100MB，你会怎么做呢？" class="heading-link"><i class="fas fa-link"></i></a>假设我们有 1000 万个整数数据，每个数据占 8 个字节，如何设计数据结构和算法，快速判断某个整数是否出现在这 1000 万数据中？ 我们希望这个功能不要占用太多的内存空间，最多不要超过 100MB，你会怎么做呢？</h2>
-      <p>1MB = 1000 Kb = 1000000 b<br>1000w * 8b  = 80 000 000 b = 80MB<br>所以直接将所有数据存放在内存中，先用快排，再进行二分查找。 这种方式是最节省内存空间的。<br>散列表和二叉树是支持快速查找的动态数据结构，但在这里不行，因为存放数据会需要额外的空间，100MB肯定不够。</p>
-
-        <h2 id="如果数据使用链表存储，二分查找的时间复杂就会变得很高，那查找的时间复杂度究竟是多少呢？">
-          <a href="#如果数据使用链表存储，二分查找的时间复杂就会变得很高，那查找的时间复杂度究竟是多少呢？" class="heading-link"><i class="fas fa-link"></i></a>如果数据使用链表存储，二分查找的时间复杂就会变得很高，那查找的时间复杂度究竟是多少呢？</h2>
-      <p>如果数据使用单链表存储且是有序的，使用快慢指针同时获取中间结点尾结点的时复是O（n），再比较元素缩小区间，那么基于有序单链表的二分查找的时复就是O（nlogn）</p>
 </div></div></article></section><nav class="paginator"><div class="paginator-inner"><span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fas fa-angle-right"></i></a></div></nav></div></div><div class="sidebar-wrap" id="sidebar-wrap"><aside class="sidebar" id="sidebar"><section class="sidebar-toc hide"></section><!-- ov = overview--><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/upload/avatar.jpg" alt="avatar"></div><p class="sidebar-ov-author__text">write code and love life</p></div><div class="sidebar-ov-social"><a class="sidebar-ov-social-item" href="https://github.com/skylarran" target="_blank" rel="noopener" data-popover="Github" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-github"></i></span></a><a class="sidebar-ov-social-item" href="/upload/wechatQR.jpeg" target="_blank" rel="noopener" data-popover="微信" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-weixin"></i></span></a><a class="sidebar-ov-social-item" href="/upload/qqQR.jpeg" target="_blank" rel="noopener" data-popover="QQ" data-popover-pos="up"><span class="sidebar-ov-social-item__icon"><i class="fab fa-qq"></i></span></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="知识共享许可协议" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg"></a></div></section></aside></div><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>Copyright © 2019~2020</span><span class="footer__icon"><i class="fas fa-heart"></i></span><span>Skylar Ran</span></div><div><span>由 <a href="http://hexo.io/" title="Hexo" target="_blank" rel="noopener">Hexo</a> 强力驱动</span><span> v4.0.0</span><span class="footer__devider">|</span><span>主题 - <a href="https://github.com/liuyib/hexo-theme-stun/" title="Stun" target="_blank" rel="noopener">Stun</a></span><span> v2.0.0-rc.0</span></div><div class="busuanzi"><span class="busuanzi-siteuv"><span class="busuanzi-siteuv__icon"><i class="fas fa-user"></i></span><span class="busuanzi-siteuv__info">访问人数</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_uv"></span></span><span class="busuanzi-sitepv"><span class="busuanzi-siteuv__icon"><i class="fas fa-eye"></i></span><span class="busuanzi-siteuv__info">浏览总量</span><span class="busuanzi-siteuv__value" id="busuanzi_value_site_pv"></span></span></div><div>托管于<a href="https://github.com/SkylarRan/SkylarRan.github.io" rel="noopener" target="_blank">Github</a></div></div></footer><div class="loading-bar" id="loading-bar"><div class="loading-bar__progress"></div></div><div class="back2top" id="back2top"><span class="back2top__icon"><i class="fas fa-rocket"></i></span></div></div><div class="search-mask"></div><div class="search-popup"><span class="search-close"></span><div class="search-input"><input placeholder="搜索文章（支持多关键词，请用空格分隔）"></div><div class="search-results"></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="https://cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@latest/canvas-nest.min.js" color="0,0,0" opacity="0.6" count="99" zIndex="-1"></script><script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.min.js"></script><script>function initSearch() {
   var isXML = true;
   var search_path = 'search.json';
